@@ -1,0 +1,12 @@
+table.users th, table.users td {
+	border-right: 1px solid #cccccc;
+}
+table.users th {
+	border-bottom: 1px solid #cccccc;
+}
+.searchForm > span {
+	margin-left: 1em;
+}
+.searchForm > span:before {
+	content: 'count:'
+}
