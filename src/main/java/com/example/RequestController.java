@@ -14,23 +14,25 @@ public class RequestController{
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
     
-    public void run(String... strings) throws Exception {
-        String sql = "select id from customer";
+    public List<Map<String, Object>> run(String... strings) throws Exception {
+        String sql = "select * from customer";
         SqlParameterSource param = new MapSqlParameterSource();
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, param);
         System.out.println("result =" + list);
+        return list;
     }
     
     @RequestMapping(value="/")
-    public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index.html");
+    public List<Map<String, Object>> index() {
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("index.html");
+        List<Map<String, Object>> list = null;
         try {
-            run("a", "b");
+            list = run("a", "b");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return modelAndView;
+        return list;
     }
 }
