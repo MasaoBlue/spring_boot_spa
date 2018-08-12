@@ -1,0 +1,17 @@
+<h2>task list</h2>
+<div class="createForm">
+  <input type="text" placeholder="title" [(ngModel)]="task.title">
+  <input type="text" placeholder="detail" [(ngModel)]="task.detail">
+  <button (click)="create()">登録</button>
+</div>
+<div class="searchForm">
+  <input type="text" placeholder="search title" [(ngModel)]="title" (keyup)="search()">
+  <span>{{tasks.length}}</span>
+</div>
+<div class="tasks">
+  <div *ngFor="let task of tasks" class="task">
+    <div>{{task.ID}}</div>
+    <div>{{task.TITLE}}</div>
+    <div>{{task.DETAIL}}</div>
+  </div>
+</div>

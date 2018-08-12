@@ -20,4 +20,5 @@ INSERT INTO users(name, email) VALUES
 ('Martena Ochoa', 'mattis.velit.justo@taciti.com');
 
 INSERT INTO tasks(title, detail, limit_at, completed_at) VALUES
-('タイトル', '詳細文章です', TIME('2018-08-20 12:30:00'), TIME('2018-08-19 12:34:56'));
+('タイトル1', '詳細文章1です', TIME('2018-08-20 12:30:00'), TIME('2018-08-19 12:34:56')),
+('タイトル2', '詳細文章2です', TIME('2018-08-22 12:30:00'), TIME('2018-08-21 12:34:56'));

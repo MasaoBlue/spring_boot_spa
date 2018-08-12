@@ -8,40 +8,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 @RestController
-public class RequestController{
+@RequestMapping(value="/api/task")
+public class TaskController{
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
     
-    public List<Map<String, Object>> execSearch(String name) throws Exception {
-        String searchName= "%" + name.toLowerCase() + "%";
-        String sql = "SELECT * FROM users WHERE LOWER(name) LIKE :name";
+    public List<Map<String, Object>> execSearch(String title) throws Exception {
+        String searchTitle= "%" + title.toLowerCase() + "%";
+        String sql = "SELECT * FROM tasks WHERE LOWER(title) LIKE :title";
 
         MapSqlParameterSource param = new MapSqlParameterSource();
-        param.addValue("name", searchName);
+        param.addValue("title", searchTitle);
 
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, param);
-        System.out.println(String.format("search[%s] => result count:%s", name, list.size()));
+        System.out.println(String.format("search[%s] => result count:%s", title, list.size()));
         return list;
     }
     
-    public int execCreate(UserForm userForm) throws Exception {
-        String sql = "insert into users(name, email) values (:name, :email)";
+    public int execCreate(TaskForm taskForm) throws Exception {
+        String sql = "insert into tasks(title, detail) values (:title, :detail)";
 
         MapSqlParameterSource param = new MapSqlParameterSource();
-        param.addValue("name", userForm.getName());
-        param.addValue("email", userForm.getEmail());
+        param.addValue("title", taskForm.getTitle());
+        param.addValue("detail", taskForm.getDetail());
 
         int result = jdbcTemplate.update(sql, param);
-        System.out.println(String.format("create => result count:%s", result));
+        System.out.println(String.format("create task => result count:%s", result));
         return result;
     }
     
-    @GetMapping(value="/")
+    @GetMapping
     public List<Map<String, Object>> index(@RequestParam String name) {
         List<Map<String, Object>> list = null;
         try {
@@ -52,10 +54,10 @@ public class RequestController{
         return list;
     }
     
-    @PostMapping(value="/")
-    public boolean create(@RequestBody UserForm userForm) {
+    @PostMapping
+    public boolean create(@RequestBody TaskForm taskForm) {
         try {
-            execCreate(userForm);
+            execCreate(taskForm);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
