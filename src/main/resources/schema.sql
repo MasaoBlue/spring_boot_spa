@@ -1,5 +1,5 @@
-create table users (
-    id int primary key,
-    name varchar(50),
-    email varchar(50)
+CREATE TABLE users (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(50),
+    email VARCHAR(50)
 );

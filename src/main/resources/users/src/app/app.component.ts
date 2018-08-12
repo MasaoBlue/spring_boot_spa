@@ -9,6 +9,8 @@ import { Http, URLSearchParams, Headers }  from '@angular/http';
 export class AppComponent {
     name = '';
     users = [];
+    result = '';
+    user = {};
 
     constructor(private http: Http) {
         this.search()
@@ -28,6 +30,19 @@ export class AppComponent {
                 this.result = `通信失敗：${error.statusText}`;
             }
         )
+    }
 
+    // 検索
+    create() {
+        console.log(this.name)
+        this.http.post('http://localhost:8080/', this.user).subscribe(
+            response => {
+                this.users = response.json();
+                console.dir(response.json())
+            },
+            error => {
+                this.result = `通信失敗：${error.statusText}`;
+            }
+        )
     }
 }
