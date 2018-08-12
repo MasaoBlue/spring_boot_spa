@@ -4,9 +4,11 @@ table.users th, table.users td {
 table.users th {
 	border-bottom: 1px solid #cccccc;
 }
-.searchForm > span {
-	margin-left: 1em;
-}
-.searchForm > span:before {
-	content: 'count:'
+.searchForm{
+    > span {
+        margin-left: 1em;
+    }
+    > span:before {
+        content: 'count:'
+    }
 }
