@@ -44,7 +44,7 @@ public class TaskController{
     }
     
     @GetMapping
-    public List<Map<String, Object>> index(@RequestParam String name) {
+    public List<Map<String, Object>> index(@RequestParam(defaultValue = "") String name) {
         List<Map<String, Object>> list = null;
         try {
             list = execSearch(name);
