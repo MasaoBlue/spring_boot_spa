@@ -1,4 +1,4 @@
-package com.example;
+package com.example.application.task;
 
 import lombok.Getter;
 
