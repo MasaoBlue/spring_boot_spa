@@ -5,7 +5,7 @@ Spring BootとAngularでSPAページ作成
 
 ## Angularアプリ起動
 ```sh
-cd src/main/resources/users
+cd client
 npm install
 npm start
 ```
