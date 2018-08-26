@@ -3,6 +3,6 @@ package com.example.application.user;
 import lombok.Getter;
 
 @Getter
-public class UserForm {
+public class UserCreateForm {
     private String name, email;
 }

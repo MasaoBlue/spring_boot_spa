@@ -1,7 +1,6 @@
 package com.example.infrastructure;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +24,7 @@ public class TaskRepository {
         param.addValue("title", searchTitle);
 
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, param);
-        System.out.println(String.format("search[%s] => result count:%s", title, list.size()));
+        System.out.println(String.format("task search[%s] => result count:%s", title, list.size()));
         return list;
     }
 
@@ -37,7 +36,7 @@ public class TaskRepository {
         param.addValue("detail", task.getDetail());
 
         int result = jdbcTemplate.update(sql, param);
-        System.out.println(String.format("create task => result count:%s", result));
+        System.out.println(String.format("task create => result count:%s", result));
         return result;
     }
 
@@ -50,7 +49,7 @@ public class TaskRepository {
         param.addValue("id", id);
 
         int result = jdbcTemplate.update(sql, param);
-        System.out.println(String.format("update complete task:%s => completed_at: %2$tF %2$tT", id, completed_at));
+        System.out.println(String.format("task update complete: s%s => completed_at: %2$tF %2$tT", id, completed_at));
         return result;
     }
 }

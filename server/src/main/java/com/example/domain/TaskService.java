@@ -3,7 +3,6 @@ package com.example.domain;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -14,7 +13,7 @@ import com.example.infrastructure.TaskRepository;
 
 @Component
 public class TaskService {
-    @Autowired(required = true)
+    @Autowired
     TaskRepository taskRepository;
     
     public TaskService() {

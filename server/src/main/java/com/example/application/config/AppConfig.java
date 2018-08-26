@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.example.infrastructure.TaskRepository;
+import com.example.infrastructure.UserRepository;
 
 @Configuration
 @PropertySource(value = { "classpath:application.properties" })
@@ -20,8 +21,13 @@ public class AppConfig {
     private Environment env;
     
     @Bean
-    public TaskRepository TaskRepository() {
+    public TaskRepository taskRepository() {
         return new TaskRepository();
+    }
+    
+    @Bean
+    public UserRepository userRepository() {
+        return new UserRepository();
     }
     
     @Bean

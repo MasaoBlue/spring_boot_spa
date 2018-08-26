@@ -1,5 +1,10 @@
 package com.example.domain;
 
-public class User {
+import lombok.Getter;
+import lombok.Setter;
 
+public class User {
+    @Getter
+    @Setter
+    private String id, name, email;
 }
