@@ -31,15 +31,10 @@ public class AppConfig {
     }
     
     @Bean
-    public NamedParameterJdbcTemplate jdbcTemplate(DataSource dataSource) {
+    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
         return new NamedParameterJdbcTemplate(dataSource);
     }
-    
-    @Bean
-    public JdbcTemplate jdbcTemplateTest(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
-    
+        
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
