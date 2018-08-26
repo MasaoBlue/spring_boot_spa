@@ -4,61 +4,51 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import com.example.domain.TaskService;
+
+import org.springframework.stereotype.Component;
+
+@Component
 @RestController
-@RequestMapping(value="/api/task")
-public class TaskController{
-    @Autowired
-    NamedParameterJdbcTemplate jdbcTemplate;
+@RequestMapping(value = "/api/task")
+public class TaskController {
     
-    public List<Map<String, Object>> execSearch(String title) throws Exception {
-        String searchTitle= "%" + title.toLowerCase() + "%";
-        String sql = "SELECT * FROM tasks WHERE LOWER(title) LIKE :title";
-
-        MapSqlParameterSource param = new MapSqlParameterSource();
-        param.addValue("title", searchTitle);
-
-        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql, param);
-        System.out.println(String.format("search[%s] => result count:%s", title, list.size()));
-        return list;
-    }
-    
-    public int execCreate(TaskForm taskForm) throws Exception {
-        String sql = "insert into tasks(title, detail) values (:title, :detail)";
-
-        MapSqlParameterSource param = new MapSqlParameterSource();
-        param.addValue("title", taskForm.getTitle());
-        param.addValue("detail", taskForm.getDetail());
-
-        int result = jdbcTemplate.update(sql, param);
-        System.out.println(String.format("create task => result count:%s", result));
-        return result;
-    }
+    TaskService taskService = new TaskService();
     
     @GetMapping
-    public List<Map<String, Object>> index(@RequestParam(defaultValue = "") String name) {
+    public List<Map<String, Object>> index(@RequestParam(defaultValue = "") String title) {
         List<Map<String, Object>> list = null;
         try {
-            list = execSearch(name);
+            list = taskService.search(title);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-    
+
     @PostMapping
-    public boolean create(@RequestBody TaskForm taskForm) {
+    public boolean create(@RequestBody TaskCreateForm form) {
         try {
-            execCreate(taskForm);
+            taskService.create(form.getTitle(), form.getDetail());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    @PutMapping("{id}")
+    public boolean updateComplete(@PathVariable String id, @RequestBody TaskUpdateForm form) {
+        try {
+            taskService.updateComplete(id, form.isCompleted());
         } catch (Exception e) {
             e.printStackTrace();
             return false;

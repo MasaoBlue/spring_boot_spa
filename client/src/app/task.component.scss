@@ -1,16 +1,40 @@
+@import "./_common";
+
 .tasks {
   .task {
     display: flex;
     > * {
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
       padding: 1em;
+    }
+    .id {
+      width: 4em;
+    }
+    .title {
+      width: 60%;
+    }
+    .detail {
+      width: 40%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 }
-.searchForm{
-    > span {
-        margin-left: 1em;
-    }
-    > span:before {
-        content: 'count:'
-    }
+.createForm {
+  padding: 1em;
+  button {
+    padding: 0.3em;
+    margin-left: 1em;
+  }
+}
+.searchForm {
+  padding: 1em;
+  > span {
+    margin-left: 1em;
+  }
+  > span:before {
+    content: 'count:'
+  }
 }

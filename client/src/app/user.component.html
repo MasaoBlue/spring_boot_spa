@@ -1,27 +1,28 @@
-<h2>user list</h2>
-<div class="createForm">
-  <input type="text" placeholder="name" [(ngModel)]="user.name">
-  <input type="text" placeholder="mail" [(ngModel)]="user.email">
-  <button (click)="create()">登録</button>
+<div class="mainContent">
+  <h2>user list</h2>
+  <div class="createForm">
+    <input type="text" placeholder="name" [(ngModel)]="user.name">
+    <input type="text" placeholder="mail" [(ngModel)]="user.email">
+    <button (click)="create()">Add</button>
+  </div>
+  <div class="searchForm">
+    <input type="text" placeholder="search name" [(ngModel)]="searchName" (input)="search($event.target.value)">
+    <span>{{users.length}}</span>
+  </div>
+  <table class="users">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.ID}}</td>
+        <td>{{user.NAME}}</td>
+        <td>{{user.EMAIL}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<div class="searchForm">
-  <input type="text" placeholder="search name" [(ngModel)]="name"
-    (keyup)="search()">
-  <span>{{users.length}}</span>
-</div>
-<table class="users">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>NAME</th>
-      <th>EMAIL</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{user.ID}}</td>
-      <td>{{user.NAME}}</td>
-      <td>{{user.EMAIL}}</td>
-    </tr>
-  </tbody>
-</table>

@@ -11,6 +11,7 @@ import { UserComponent } from "./user.component";
 import { ErrorComponent } from './error.component';
 
 import { TaskService } from './task.service';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { TaskService } from './task.service';
     HttpModule,
     MY_ROUTES,
   ],
-  providers: [TaskService],
+  providers: [TaskService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
