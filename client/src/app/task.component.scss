@@ -1,3 +1,17 @@
+:host {
+  height: 100%;
+  overflow-y: scroll;
+  background: #f7f9f9;
+  padding: 1em;
+}
+.mainContent {
+  max-width: 768px;
+  margin: auto;
+  padding: 0 1em;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+}
 .tasks {
   .task {
     display: flex;
@@ -6,11 +20,25 @@
     }
   }
 }
-.searchForm{
-    > span {
-        margin-left: 1em;
-    }
-    > span:before {
-        content: 'count:'
-    }
+.createForm {
+  padding: 1em;
+  input.title {
+    padding: 0.3em;
+  }
+  button {
+    padding: 0.3em;
+    margin-left: 1em;
+  }
+}
+.searchForm {
+  padding: 1em;
+  input.title {
+    padding: 0.3em;
+  }
+  > span {
+    margin-left: 1em;
+  }
+  > span:before {
+    content: 'count:'
+  }
 }

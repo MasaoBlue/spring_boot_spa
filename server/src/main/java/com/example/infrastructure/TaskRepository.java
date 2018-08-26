@@ -1,5 +1,7 @@
 package com.example.infrastructure;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +19,7 @@ public class TaskRepository {
     
     public List<Map<String, Object>> search(String title) throws Exception {
         String searchTitle = "%" + title.toLowerCase() + "%";
-        String sql = "SELECT * FROM tasks WHERE LOWER(title) LIKE :title";
+        String sql = "SELECT * FROM tasks WHERE LOWER(title) LIKE :title ORDER BY id DESC";
 
         MapSqlParameterSource param = new MapSqlParameterSource();
         param.addValue("title", searchTitle);
@@ -36,6 +38,19 @@ public class TaskRepository {
 
         int result = jdbcTemplate.update(sql, param);
         System.out.println(String.format("create task => result count:%s", result));
+        return result;
+    }
+
+    public int updateComplete(String id, boolean completed) throws Exception {
+        String sql = "UPDATE tasks SET completed_at = :completed_at WHERE id = :id";
+
+        MapSqlParameterSource param = new MapSqlParameterSource();
+        java.sql.Timestamp completed_at = completed ? java.sql.Timestamp.valueOf(LocalDateTime.now()) : null;
+        param.addValue("completed_at", completed_at);
+        param.addValue("id", id);
+
+        int result = jdbcTemplate.update(sql, param);
+        System.out.println(String.format("update complete task:%s => completed_at: %2$tF %2$tT", id, completed_at));
         return result;
     }
 }

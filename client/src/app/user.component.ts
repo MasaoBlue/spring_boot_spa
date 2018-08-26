@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Http, URLSearchParams, Headers }  from '@angular/http';
 
 @Component({
-    selector: 'app-root',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss']
 })

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +18,9 @@ public class TaskService {
     TaskRepository taskRepository;
     
     public TaskService() {
-        AnnotationConfigApplicationContext appCtx = new AnnotationConfigApplicationContext(AppConfig.class);
-        taskRepository = appCtx.getBean(TaskRepository.class);
+        try(ConfigurableApplicationContext appCtx = new AnnotationConfigApplicationContext(AppConfig.class)) {
+            taskRepository = appCtx.getBean(TaskRepository.class);
+        }
     }
     
     public List<Map<String, Object>> search(String title) throws Exception {
@@ -31,5 +33,9 @@ public class TaskService {
         task.setTitle(title);
         task.setDetail(detail);
         return taskRepository.create(task);
+    }
+    
+    public int updateComplete(String id, boolean completed) throws Exception {
+        return taskRepository.updateComplete(id, completed);
     }
 }

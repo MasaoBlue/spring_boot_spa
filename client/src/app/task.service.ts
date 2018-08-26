@@ -24,4 +24,12 @@ export class TaskService {
       return data.json();
     }));
   }
+
+  updateComplete(id: string, completed: boolean): Observable<any> {
+    return this.http.put(this.baseUrl + '/api/task/' + id, {
+      completed: completed
+    }).pipe(map(data => {
+      return data.json();
+    }));
+  }
 }
