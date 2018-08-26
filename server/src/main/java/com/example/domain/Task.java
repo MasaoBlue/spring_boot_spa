@@ -1,5 +1,10 @@
 package com.example.domain;
 
-public class Task {
+import lombok.Getter;
+import lombok.Setter;
 
+public class Task {
+    @Getter
+    @Setter
+    private String title, detail;
 }

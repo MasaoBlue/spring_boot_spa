@@ -11,14 +11,14 @@ export class TaskService {
 
   constructor(private http: Http) {}
 
-  getTasks(name: string): Observable<any> {
+  getTasks(title: string): Observable<any> {
     return this.http.get(this.baseUrl + '/api/task', {
-      params: { name: name }
+      params: { title: title }
     }).pipe(map(data => {
       return data.json();
     }))
   }
-  
+
   create(task: Task): Observable<any> {
     return this.http.post(this.baseUrl + '/api/task', task).pipe(map(data => {
       return data.json();
